@@ -43,10 +43,10 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(10, 12, 16, 0.85);
+            background: rgba(10, 12, 16, 0.9);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--card-border);
-            padding: 15px 0;
+            padding: 12px 0;
         }
 
         .nav-container {
@@ -56,16 +56,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            position: relative;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--text-main);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .logo span {
@@ -75,8 +76,9 @@
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -84,12 +86,23 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
             color: var(--neon-blue);
             text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        /* زر القائمة للجوال (Hamburger Menu) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
         }
 
         /* الحاوية الرئيسية */
@@ -345,11 +358,50 @@
             background: rgba(10, 12, 16, 0.95);
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.1rem; }
-            .nav-links { display: none; }
-            .grid { grid-template-columns: 1fr; }
-            .card-links { flex-direction: column; }
+        /* التجاوب مع الشاشات الصغيرة (Mobile Responsiveness) */
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background: rgba(10, 12, 16, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out, padding 0.3s ease;
+                border-bottom: 1px solid var(--card-border);
+            }
+
+            .nav-links.active {
+                max-height: 350px;
+                padding: 20px 0;
+            }
+
+            .nav-links li {
+                margin: 8px 0;
+            }
+
+            .hero h1 { 
+                font-size: 2.1rem; 
+            }
+            
+            .grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .card-links { 
+                flex-direction: column; 
+            }
         }
     </style>
 </head>
@@ -362,11 +414,16 @@
                 <i class="fa-solid fa-code"></i>
                 جواد <span>بدري</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#about">عنّي</a></li>
-                <li><a href="#projects">مشاريعي ومواقعي</a></li>
-                <li><a href="#interests">اهتماماتي والمواهب</a></li>
-                <li><a href="#contact">التواصل</a></li>
+            <button class="menu-toggle" id="menu-toggle" aria-label="فتح القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-item">عنّي</a></li>
+                <li><a href="#projects" class="nav-item">مشاريعي ومواقعي</a></li>
+                <li><a href="#interests" class="nav-item">اهتماماتي والمواهب</a></li>
+                <li><a href="#apps" class="nav-item">تطبيقات البرمجة</a></li>
+                <li><a href="#services" class="nav-item">الخدمات</a></li>
+                <li><a href="#contact" class="nav-item">التواصل</a></li>
             </ul>
         </div>
     </header>
@@ -376,13 +433,13 @@
         <!-- القسم الرئيسي Definition -->
         <section id="about" class="hero">
             <h1>أهلاً بك، أنا <span>جواد بدري</span></h1>
-            <p>مطور ومبرمج شغوف بتطوير أدوات الويب التفاعلية، بناء السكربتات بلغة Python، التعامل مع لغات الهيكلة مثل XML، واستكشاف حلول التقنية وأنظمة Linux.</p>
+            <p>أنا جواد، مبرمج شاب شغوف بعالم التقنية وتطوير الويب؛ حيث أصنع مشاريعي البرمجية الخاصة وأبني صفحات ومواقع الويب المتنوعة باستخدام لغات الFront end مثل HTML، CSS، وJavaScript. وإلى جانب جديتي في البرمجة وتطوير أفكاري التقنية، أستمتع بتخصيص وقتي لهواياتي المميزة مثل عزف البيانو وتجربة الألعاب المفضلة لدي.</p>
             <a href="#projects" class="btn-main">
                 <i class="fa-solid fa-rocket"></i> استكشف كامل أعمالي
             </a>
         </section>
 
-        <!-- قسم عرض جميع المواقع والمشاريع -->
+        <!--قسم عرض جميع المواقع والمشاريع الخاصه بي-->
         <section id="projects">
             <h2 class="section-title">مواقعي ومشاريعي الرسمية</h2>
             <div class="grid">
@@ -456,29 +513,12 @@
                     </div>
                 </div>
 
-                <!-- 5. تطبيق التسبيح Praise -->
-                <div class="card">
-                    <div>
-                        <div class="card-icon"><i class="fa-solid fa-kaaba"></i></div>
-                        <h3>تطبيق التسبيح (Praise)</h3>
-                        <p>تطبيق ويب بسيط وعصري لمتابعة الأذكار والتسبيح بسهولة.</p>
-                        <div class="card-tags">
-                            <span class="tag">Web App</span>
-                            <span class="tag">Utility</span>
-                        </div>
-                    </div>
-                    <div class="card-links">
-                        <a href="https://jawadbadry.github.io/Praise/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
-                        <a href="https://app.box.com/file/2421051416468?s=kx2oqnfzuwbgxt1jbsvi2ymrbii5wcwp&sb=/activity" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a>
-                    </div>
-                </div>
-
-                <!-- 6. لعبة الثعبان Snake -->
+                <!-- 5. لعبة الثعبان Snake -->
                 <div class="card">
                     <div>
                         <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
                         <h3>لعبة الثعبان (Snake)</h3>
-                        <p>الفيلم الكلاسيكي للعبة الثعبان الشهيرة برؤية برمجية خاصة في المتصفح.</p>
+                        <p>اللعبة الكلاسيكية للعبة الثعبان الشهيرة برؤية برمجية خاصة في المتصفح.</p>
                         <div class="card-tags">
                             <span class="tag">Canvas Game</span>
                             <span class="tag">JavaScript</span>
@@ -486,7 +526,25 @@
                     </div>
                     <div class="card-links">
                         <a href="https://jawadbadry.github.io/snack/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
-                        <span class="card-btn disabled"><i class="fa-solid fa-clock"></i> قريباً...</span>
+                        <span class="card-btn disabled"><i class="fa-solid fa-download"></i>لا يوجد تطبيق</span>
+                    </div>
+                </div>
+
+                <!-- 6. Minecraft free -->
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
+                        <h3>Minecraft free</h3>
+                        <p>تطبيق أو موقع يقدم جميع إصدارات لعبة Minecraft.</p>
+                        <div class="card-tags">
+                            <span class="tag">Play</span>
+                            <span class="tag">Game</span>
+                            <span class="tag">Minecraft</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://jawadbadry.github.io/Minecraft-free/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://app.box.com/s/7erqaqbkcbjb3zvyxmad9v03tak00rt3" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a>
                     </div>
                 </div>
 
@@ -498,19 +556,17 @@
             <h2 class="section-title">اهتماماتي، التقنيات والمواهب</h2>
             <div class="grid">
 
-                <!-- لغة XML -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-file-code"></i></div>
-                    <h3>لغات الهيكلة & XML</h3>
-                    <p>التعامل مع لغة XML في ترتيب وصياغة البيانات الهيكلية، واستخدامها في تهيئة وإعداد ملفات التكوين للتطبيقات والمشاريع.</p>
+                    <h3>البرمجة بلغات الFront End</h3>
+                    <p>التعامل مع لغات البرمجة في جانب العميل (Client-Side) مثل HTML, CSS, و JavaScript لبناء وتطوير صفحات الويب التفاعلية.</p>
                     <div class="card-tags">
-                        <span class="tag">XML</span>
-                        <span class="tag">Data Structuring</span>
-                        <span class="tag">Configuration</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
                     </div>
                 </div>
 
-                <!-- Python -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-brands fa-python"></i></div>
                     <h3>برمجة السكربتات بـ Python</h3>
@@ -521,7 +577,6 @@
                     </div>
                 </div>
 
-                <!-- العزف على البيانو -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-music"></i></div>
                     <h3>موهبة العزف على البيانو</h3>
@@ -533,7 +588,6 @@
                     </div>
                 </div>
 
-                <!-- ماينكرافت والـ Command Blocks -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
                     <h3>إبداعات ماينكرافت & Command Blocks</h3>
@@ -544,7 +598,6 @@
                     </div>
                 </div>
 
-                <!-- أنظمة Linux/Ubuntu -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-brands fa-ubuntu"></i></div>
                     <h3>أنظمة Linux & Ubuntu</h3>
@@ -555,7 +608,6 @@
                     </div>
                 </div>
 
-                <!-- تصميم واجهات الويب -->
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
                     <h3>تنسيق الواجهات UI/UX</h3>
@@ -569,23 +621,141 @@
             </div>
         </section>
 
+        <!--مواقع و تطبيقات استعملها للبرمجه-->
+        <section id="apps">
+            <h2 class="section-title">مواقع و تطبيقات استعملها للبرمجه</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-brands fa-github"></i></div>
+                        <h3>GitHub</h3>
+                        <p>منصة تطوير برمجيات مفتوحة المصدر حيث يمكن للمطورين التعاون في المشاريع ومشاركة الكود.</p>
+                        <div class="card-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">github</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://github.com/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://play.google.com/store/apps/details/github?id=com.github.android&hl=ar" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h3>median</h3>
+                        <p>موقع أو تطبيق يساعد العميل في تحويل موقعه إلى تطبيق بأي شكل وأي صيغة.</p>
+                        <div class="card-tags">
+                            <span class="tag">web</span>
+                            <span class="tag">app</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://median.co/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://app.box.com/s/huk1t6r2ls512kgoxu1ano6ojbhi1j52" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i>تثبيت التطبيق</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+                        <h3>groq</h3>
+                        <p>أستستفيد من هذه المنصة بعض مفاتيح الـ API.</p>
+                        <div class="card-tags">
+                            <span class="tag">API System</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://groq.com/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://app.box.com/s/785llsr32h67rw2tjh48o83m9cynasbl" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-brands fa-python"></i></div>
+                        <h3>Google Colab</h3>
+                        <p>منصة ويب تفاعلية لكتابة وتنفيذ كود Python بسهولة.</p>
+                        <div class="card-tags">
+                            <span class="tag">Web App</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://colab.research.google.com/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://app.box.com/s/mqga8jp5inelasx6eh9a4l1ef1ov2xz1" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-solid fa-file-code"></i></div>
+                        <h3>VC Code</h3>
+                        <p>بيئة تطوير شاملة لكتابة وتنفيذ الكود بسهولة في الحاسوب.</p>
+                        <div class="card-tags">
+                            <span class="tag">code</span>
+                            <span class="tag">editor</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://code.visualstudio.com/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://code.visualstudio.com/" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت البرنامج</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon"><i class="fa-solid fa-file-code"></i></div>
+                        <h3>acode</h3>
+                        <p>بيئة تطوير شاملة لكتابة وتنفيذ الكود بسهولة في الهواتف المحمولة والأجهزة اللوحية.</p>
+                        <div class="card-tags">
+                            <span class="tag">code</span>
+                            <span class="tag">editor</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://acode.app/" target="_blank" class="card-btn primary"><i class="fa-solid fa-globe"></i> معاينة الموقع</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" target="_blank" class="card-btn secondary"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--الخدمات-->
+        <section id="services">
+            <h2 class="section-title">الخدمات</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-file-code"></i></div>
+                    <h3>أساعدك في برمجة لغات الـ Front End</h3>
+                    <p>أساعدك (بنسبة 100% أنت فقط اطلب) في برمجة صفحات الويب التفاعلية باستخدام لغات HTML, CSS, و JavaScript.</p>
+                    <div class="card-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- قسم التواصل الفعلي -->
         <section id="contact">
             <h2 class="section-title">قنوات التواصل والحسابات</h2>
             <div class="social-grid">
-
                 <a href="https://github.com/JawadBadry" target="_blank" class="social-card">
                     <i class="fa-brands fa-github"></i>
                     <h3>GitHub</h3>
                     <p>متابعة كافة المستودعات والأكواد المفتوحة المصدر</p>
                 </a>
-
-                 <a href="mailto:jawadbadry8@gmail.com" target="_blank" class="social-card">
+                 <a href="mailto:jawadwork616@gmail.com" target="_blank" class="social-card">
                     <i class="fa-solid fa-envelope"></i>
                     <h3>البريد الإلكتروني</h3>
-                    <p>متاح للتواصل والمناقشات البرمجية والتقنية</p>
+                    <p>متاح للتواصل والمناقشات البرمجية والتقنية وطلب تصميم المواقع</p>
                 </a>
-
             </div>
         </section>
 
@@ -596,5 +766,21 @@
         <p>تم تصميم وتطوير الموقع بالكامل بواسطة <strong>جواد بدري</strong> &copy; 2026</p>
     </footer>
 
+    <!-- سكريبت تشغيل القائمة الجانبية للجوال -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
